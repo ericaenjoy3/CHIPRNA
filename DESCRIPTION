@@ -1,0 +1,17 @@
+Package: CHIPRNA
+Title: Integration of ChIP-seq with RNA-seq data for heatmap, barplot, and boxplot
+Version: 0.0.0.9
+Author: Erica Liu
+Maintainer: Erica LIu <ericaenjoy3@yahoo.co.uk>
+Description: Integration of ChIP-seq with RNA-seq data for heatmap, barplot, and boxplot.
+Depends: R (>= 3.4.0)
+Imports: ModClusterR, ComplexHeatmap, EnrichedHeatmap, RColorBrewer, ggplot2, dplyr, rlang, grDevices, multiplot, circlize, methods, data.table, tibble, readr
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+Collate:
+    'CHIPRNAclass.R'
+    'CHIPRNAconst.R'
+    'CHIPRNAgeneric.R'
+    'CHIPRNAmethods.R'
+RoxygenNote: 6.0.1
