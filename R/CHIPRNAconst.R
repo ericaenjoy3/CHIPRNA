@@ -8,7 +8,7 @@
 #' @param sms sample name(s) for corresponding bed file(s)
 #' @return a \code{chip} object
 #' @export chipConst
-chipConst <- function(chipF, sms) {
+chipConst <- function(chipF, sms = NULL) {
   if (!is.null(sms) && length(sms)>1) {
     stopifnot(length(chipF) == length(sms))
     dat.list <- lapply(seq_along(chipF), function(i){
@@ -93,7 +93,8 @@ tpmConst <- function(tpm, gene2peak.obj, small = 0.05, logit = TRUE){
   tpm.grp <- SepTPMCnt(tpm)$tpm.grp
   tpm.grp <- data.frame(gid = rownames(tpm.grp), tpm.grp) %>% mutate(gid = as.character(.data$gid))
   # mean expression of equal-distance genes
-  dat <- left_join(gene2peak.obj@bed, tpm.grp, by = c('gid' = 'gid')) %>% select(-c(5:6)) %>% data.table()
+  dat <- left_join(gene2peak.obj@bed, tpm.grp, by = c('gid' = 'gid')) %>%
+    select(-c(5:6)) %>% data.table()
   dat <- as_tibble(dat[, lapply(.SD,mean), by = c("chr", "start", "end", "clus")])
   info <- select(dat, 1:4)
   tpm.val <- select(dat, -c(1:4))

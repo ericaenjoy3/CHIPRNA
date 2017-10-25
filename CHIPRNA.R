@@ -10,6 +10,7 @@
 
 suppressPackageStartupMessages(library("argparse"))
 library(GOplot)
+library(CHIPRNA)
 
 parser <- ArgumentParser()
 parser$add_argument("--chip", type = "character", nargs = "+", required = TRUE, help = "one or multiple chipseq bed files")
