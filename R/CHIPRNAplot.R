@@ -108,7 +108,6 @@ setMethod(f = "plotBox",
       stop("option is out of bound (1:3)")
     }
     ldat <- melt(data.table(grp = grp, tpm), id.vars = "grp")
-    browser()
     theme_set(theme_grey(base_size = 15))
     p1 <- ggplot(ldat, aes_(x = ~variable, y = ~value, color = ~grp)) +
       geom_boxplot(na.rm = TRUE, notch = FALSE) +
