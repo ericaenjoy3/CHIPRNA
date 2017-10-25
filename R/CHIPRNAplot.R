@@ -92,7 +92,6 @@ setMethod(f = "plotBox",
   definition = function(tpm.obj, pdffout, option){
     # validation
     dir.create(dirname(pdffout), showWarnings = FALSE)
-    browser()
     if (option==1) {
       grp <- tpm.obj@grp.after
       tpm <- tpm.obj@tpm.rscale
