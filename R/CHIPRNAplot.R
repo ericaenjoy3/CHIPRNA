@@ -92,6 +92,7 @@ setMethod(f = "plotBox",
   definition = function(tpm.obj, pdffout, option){
     # validation
     dir.create(dirname(pdffout), showWarnings = FALSE)
+    browser()
     if (option==1) {
       grp <- tpm.obj@grp.after
       tpm <- tpm.obj@tpm.rscale
@@ -107,7 +108,7 @@ setMethod(f = "plotBox",
     } else {
       stop("option is out of bound (1:3)")
     }
-    ldat <- melt(data.table(grp = tpm.obj@grp.before, tpm.obj@tpm.ascale), id.vars = "grp")
+    ldat <- melt(data.table(grp = grp, tpm), id.vars = "grp")
     theme_set(theme_grey(base_size = 15))
     p1 <- ggplot(ldat, aes(~variable, ~value, color = ~grp)) +
     #geom_jitter(alpha=I(1/4), aes(color=grp),na.rm=TRUE) +

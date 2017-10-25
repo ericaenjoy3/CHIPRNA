@@ -25,7 +25,7 @@ parser$add_argument("--loj", action = "store_true", help = "LOJ bed input")
 args <- parser$parse_args()
 
 if (!args$loj) {
-  chip.obj <- chipConst(chipF = args$chip, sms = args$sms)
+  chip.obj <- chipConst(chipF = args$chip, sms = NULL)
 } else {
   chip.obj <- chiplojConst(chipF = args$chip, reverse = TRUE)
 }
