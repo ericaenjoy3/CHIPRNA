@@ -109,13 +109,13 @@ setMethod(f = "plotBox",
     }
     ldat <- melt(data.table(grp = grp, tpm), id.vars = "grp")
     theme_set(theme_grey(base_size = 15))
-    p1 <- ggplot(ldat, aes(~variable, ~value, color = ~grp)) +
+    p1 <- ggplot(ldat, aes(variable, value, color = grp)) +
     #geom_jitter(alpha=I(1/4), aes(color=grp),na.rm=TRUE) +
     # geom_violin(alpha=I(1/4), aes(fill=grp),na.rm=TRUE) +
     geom_boxplot(na.rm = TRUE, notch = FALSE) +
     labs(x = "",y = ylab)+
     theme(legend.title = element_blank(), panel.spacing = unit(2, "lines"), legend.position = "top", axis.text.x = element_text(angle = 90))
-    p2 <- ggplot(ldat, aes(~grp, ~value, color = ~variable)) +
+    p2 <- ggplot(ldat, aes(grp, value, color = variable)) +
     #geom_jitter(alpha=I(1/4), aes(color=grp),na.rm=TRUE) +
     # geom_violin(alpha=I(1/4), aes(fill=grp),na.rm=TRUE) +
     geom_boxplot(na.rm = TRUE, notch = FALSE) +
@@ -123,7 +123,7 @@ setMethod(f = "plotBox",
     theme(legend.title = element_blank(), panel.spacing = unit(2, "lines"), legend.position = "top", axis.text.x = element_text(angle = 90))
     # png(pngfout,width=min(3000,length(unique(ldat$variable))*800),height=3000,res=300)
     pdf(pdffout, height = 7*2)
-    multiplot(p1, p2, cols = 1)
+    multiplot(p1,p2,cols = 1)
     dev.off()
   }
 )
