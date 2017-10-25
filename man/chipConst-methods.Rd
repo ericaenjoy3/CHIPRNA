@@ -4,10 +4,10 @@
 \alias{chipConst}
 \title{create a \code{chip} object from args list}
 \usage{
-chipConst(chip, sms)
+chipConst(chipF, sms)
 }
 \arguments{
-\item{chip}{bed file(s)}
+\item{chipF}{bed file}
 
 \item{sms}{sample name(s) for corresponding bed file(s)}
 }

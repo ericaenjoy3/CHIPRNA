@@ -3,12 +3,15 @@
 \docType{methods}
 \name{closeGene2Peak}
 \alias{closeGene2Peak}
+\alias{updateChip,chip,gene2peak-method}
 \alias{closeGene2Peak,chip-method}
 \title{find nearest gene to peak}
 \usage{
 closeGene2Peak(obj,
   genef = "~/athena/Gencode/mm10/annotation/transcript_tss.bed",
   genomef = "~/athena/Gencode/mm10/sequence/chrNameLength.genome")
+
+\S4method{updateChip}{chip,gene2peak}(chip.obj, other.obj)
 
 \S4method{closeGene2Peak}{chip}(obj,
   genef = "~/athena/Gencode/mm10/annotation/transcript_tss.bed",

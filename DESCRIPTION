@@ -5,7 +5,7 @@ Author: Erica Liu
 Maintainer: Erica LIu <ericaenjoy3@yahoo.co.uk>
 Description: Integration of ChIP-seq with RNA-seq data for heatmap, barplot, and boxplot.
 Depends: R (>= 3.4.0)
-Imports: ModClusterR, ComplexHeatmap, EnrichedHeatmap, RColorBrewer, ggplot2, dplyr, rlang, grDevices, multiplot, circlize, methods, data.table, tibble, readr
+Imports: ModClusterR, ComplexHeatmap, EnrichedHeatmap, RColorBrewer, ggplot2, dplyr, rlang, grDevices, multiplot, RNA, circlize, methods, data.table, tibble, readr
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
@@ -14,4 +14,5 @@ Collate:
     'CHIPRNAconst.R'
     'CHIPRNAgeneric.R'
     'CHIPRNAmethods.R'
+    'CHIPRNAplot.R'
 RoxygenNote: 6.0.1
