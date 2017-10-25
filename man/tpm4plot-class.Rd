@@ -11,16 +11,18 @@ Store TPM and related information for plotting
 \section{Slots}{
 
 \describe{
-\item{\code{tpm.value}}{A code{tbl} object, representing raw TPM values of either individual or grouped samples'}
+\item{\code{tpm.val}}{A code{tbl} object, representing raw TPM values of either individual or grouped samples'}
 
 \item{\code{tpm.ascale}}{A code{tbl} object, representing TPM values standardized of all samples}
 
 \item{\code{tpm.rscale}}{A code{tbl} object, representing TPM values standardized across rows of all samples, zero variance rows were filtered according to var.idx}
 
+\item{\code{info}}{A code{tbl} object, representing 'chr', 'start', 'end' and 'clus' of peaks genes are closest to.}
+
 \item{\code{grp.before}}{A character vector the same data value as the 4th column of the \code{bed} slot of the \code{chip} object. The length of \code{grp.before} is identical to the row numbers of \code{tpm.value} and \code{tpm.ascale}}
 
 \item{\code{grp.after}}{A character vector of \code{grp.before} filtered by \code{var.idx}.}
 
-\item{\code{vari.idx}}{A logical vector of the same length as \code{grp.before} or the same row numbers as either \code{tpm.val} or \code{tpm.ascale}.}
+\item{\code{var.idx}}{A logical vector of the same length as \code{grp.before} or the same row numbers as either \code{tpm.val} or \code{tpm.ascale}.}
 }}
 

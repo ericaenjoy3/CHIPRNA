@@ -83,21 +83,21 @@ chiplojConst <- function(chipF, reverse = FALSE) {
 #' @name tpmConst
 #' @rdname tpmConst-methods
 #' @description Do something
-#' @param tpm a tpm object
-#' @param gene2peak a gene2peak class
+#' @param tpm a \code{tpm} object.
+#' @param gene2peak.obj a \code{gene2peak} object.
 #' @param small a numeric value for addding to TPM value
 #' @param logit a logical value for whethether to log2 transform TPM value before proceeding to tpm.ascale and tpm.rscale
 #' @return A \code{tpm4plot} object
 #' @export tpmConst
 tpmConst <- function(tpm, gene2peak.obj, small = 0.05, logit = TRUE){
   tpm.grp <- SepTPMCnt(tpm)$tpm.grp
-  tpm.grp <- data.frame(gid = rownames(tpm.grp), tpm.grp) %>% mutate(gid = as.character(gid))
+  tpm.grp <- data.frame(gid = rownames(tpm.grp), tpm.grp) %>% mutate(gid = as.character(.data$gid))
   # mean expression of equal-distance genes
   dat <- left_join(gene2peak.obj@bed, tpm.grp, by = c('gid' = 'gid')) %>% select(-c(5:6)) %>% data.table()
   dat <- as_tibble(dat[, lapply(.SD,mean), by = c("chr", "start", "end", "clus")])
   info <- select(dat, 1:4)
   tpm.val <- select(dat, -c(1:4))
-  grp.before <- pull(dat, clus)
+  grp.before <- pull(dat, .data$clus)
   # transform tpm for standardization of all samples or standardization across samples of a gene
   tpm.trans <- if (logit) {tpm.val %>% mutate_all(funs(`+`), small) %>% mutate_all(funs(log2))}
   tpm.ascale <- as_tibble(matrix(scale(as.vector(as.matrix(tpm.trans))), ncol=ncol(tpm.trans), dimnames=list(NULL, colnames(tpm.trans))))

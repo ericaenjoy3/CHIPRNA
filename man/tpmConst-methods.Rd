@@ -7,13 +7,13 @@
 tpmConst(tpm, gene2peak.obj, small = 0.05, logit = TRUE)
 }
 \arguments{
-\item{tpm}{a tpm object}
+\item{tpm}{a \code{tpm} object.}
+
+\item{gene2peak.obj}{a \code{gene2peak} object.}
 
 \item{small}{a numeric value for addding to TPM value}
 
 \item{logit}{a logical value for whethether to log2 transform TPM value before proceeding to tpm.ascale and tpm.rscale}
-
-\item{gene2peak}{a gene2peak class}
 }
 \value{
 A \code{tpm4plot} object

@@ -1,10 +1,10 @@
 #' @include CHIPRNAclass.R CHIPRNAconst.R CHIPRNAgeneric.R
-#' @rdname closeGene2Peak-methods
+#' @rdname updateChip-methods
 setMethod(f = "updateChip",
   signature = c(chip.obj = "chip", other.obj = "gene2peak"),
   definition = function(chip.obj, other.obj) {
-    str_before <- apply(select(chip.obj@bed, chr:clus), 1, paste, collapse = "-")
-    str_after <- apply(select(other.obj@bed, chr:clus), 1, paste, collapse = "-")
+    str_before <- apply(select(chip.obj@bed, .data$chr:.data$clus), 1, paste, collapse = "-")
+    str_after <- apply(select(other.obj@bed, .data$chr:.data$clus), 1, paste, collapse = "-")
     idx <- which(str_before %in% str_after)
     return(new("chip", bed = chip.obj@bed[idx,]))
   }
@@ -14,7 +14,7 @@ setMethod(f = "updateChip",
 setMethod(f = "updateChip",
   signature = c(chip.obj = "chip", other.obj = "tpm4plot"),
   definition = function(chip.obj, other.obj) {
-    idx <- tpm.obj@var.idx
+    idx <- other.obj@var.idx
     return(new("chip", bed = chip.obj@bed[idx,]))
   }
 )
@@ -23,8 +23,8 @@ setMethod(f = "updateChip",
 setMethod(f = "updateChipLOJ",
   signature = c(chiploj.obj = "chiploj", other.obj = "gene2peak"),
   definition = function(chiploj.obj, other.obj) {
-    str_before <- apply(select(chiploj.obj@bed, chr:clus), 1, paste, collapse = "-")
-    str_after <- apply(select(other.obj@bed, chr:clus), 1, paste, collapse = "-")
+    str_before <- apply(select(chiploj.obj@bed, .data$chr:.data$clus), 1, paste, collapse = "-")
+    str_after <- apply(select(other.obj@bed, .data$chr:.data$clus), 1, paste, collapse = "-")
     idx <- which(str_before %in% str_after)
     return(new("chiploj", bed = chiploj.obj@bed[idx,], binmat = chiploj.obj@binmat[idx,]))
   }
@@ -34,7 +34,7 @@ setMethod(f = "updateChipLOJ",
 setMethod(f = "updateChipLOJ",
   signature = c(chiploj.obj = "chiploj", other.obj = "tpm4plot"),
   definition = function(chiploj.obj, other.obj) {
-    idx <- tpm.obj@var.idx
+    idx <- other.obj@var.idx
     return(new("chiploj", bed = chiploj.obj@bed[idx,], binmat = chiploj.obj@binmat[idx,]))
   }
 )
@@ -43,8 +43,8 @@ setMethod(f = "updateChipLOJ",
 setMethod(f = "updateG2P",
   signature = c(chip.obj = "chip", gene2peak.obj = "gene2peak"),
   definition = function(chip.obj, gene2peak.obj) {
-    str_before <- apply(select(chip.obj@bed, chr:clus), 1, paste, collapse = "-")
-    str_after <- apply(select(gene2peak.obj@bed, chr:clus), 1, paste, collapse = "-")
+    str_before <- apply(select(chip.obj@bed, .data$chr:.data$clus), 1, paste, collapse = "-")
+    str_after <- apply(select(gene2peak.obj@bed, .data$chr:.data$clus), 1, paste, collapse = "-")
     idx <- order(match(str_after, str_before))
     return(new("gene2peak", bed = gene2peak.obj@bed[idx,]))
   }
@@ -53,15 +53,15 @@ setMethod(f = "updateG2P",
 #' @rdname closeGene2Peak-methods
 setMethod(f="closeGene2Peak",
   signature="chip",
-  definition=function(obj,genef,genomef){
-    before<-tempfile()
-    after<-tempfile()
+  definition=function(obj, genef, genomef){
+    before <- tempfile()
+    after <- tempfile()
     write_tsv(obj@bed,path=before,col_names=FALSE)
-    command<-paste("sort -k1,1V -k2,2n", before, "| bedtools closest -a stdin -b", genef, "-g", genomef, "-d | awk 'BEGIN{OF=\"\\t\";OFS=\"\\t\"} {print $1,$2,$3,$4,$(NF-3),$NF}' | sort -k1,1V -k2,2n -k5,5V | uniq >",after,sep=" ")
+    command <- paste("sort -k1,1V -k2,2n", before, "| bedtools closest -a stdin -b", genef, "-g", genomef, "-d | awk 'BEGIN{OF=\"\\t\";OFS=\"\\t\"} {print $1,$2,$3,$4,$(NF-3),$NF}' | sort -k1,1V -k2,2n -k5,5V | uniq >",after,sep=" ")
     cat(command,"\n")
-    Sys.setenv(SHELL="/bin/bash")
+    Sys.setenv(SHELL = "/bin/bash")
     try(system(command))
-    newObj <- new("gene2peak",bed=read_tsv(after,col_names=c("chr","start","end","clus","gid","dist")) %>% select(1:6))
+    newObj <- new("gene2peak",bed = read_tsv(after, col_names = c("chr","start","end","clus","gid","dist")) %>% select(1:6))
     unlink(before)
     unlink(after)
     return(newObj)
@@ -72,7 +72,7 @@ setMethod(f="closeGene2Peak",
 setMethod(f="deDupGene",
   signature="gene2peak",
   definition=function(obj,distThresh){
-    dat<-obj@bed %>% filter(dist!=-1, dist<=distThresh)
+    dat<-obj@bed %>% filter(.data$dist != -1, .data$dist <= distThresh)
     # the same gene dected multiple times
     norep<- dat %>% group_by(.data$gid) %>% filter(n()==1)
     # repeititon of gid within the same cluster

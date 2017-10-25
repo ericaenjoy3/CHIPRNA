@@ -14,6 +14,8 @@ plotBox(tpm.obj, pdffout, option)
 \item{tpm.obj}{An \code{tpm4plot} object.}
 
 \item{pdffout}{A pdf output file.}
+
+\item{option}{A numeric value specifying the type of tpm values for plotting. 1: row scaled TPM values; 2: all scaled TPM values; 3: log2 TPM values.}
 }
 \description{
 plot boxplots of gene expressions positioned at gene expression samples separated by the identity of peak cluster membership.

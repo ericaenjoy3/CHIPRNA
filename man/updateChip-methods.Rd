@@ -3,10 +3,13 @@
 \docType{methods}
 \name{updateChip}
 \alias{updateChip}
+\alias{updateChip,chip,gene2peak-method}
 \alias{updateChip,chip,tpm4plot-method}
 \title{Update the \code{bed} slot of the \code{chip} object based upon a \code{gene2peak} object or a \code{tpm4plot} object.}
 \usage{
 updateChip(chip.obj, other.obj)
+
+\S4method{updateChip}{chip,gene2peak}(chip.obj, other.obj)
 
 \S4method{updateChip}{chip,tpm4plot}(chip.obj, other.obj)
 }

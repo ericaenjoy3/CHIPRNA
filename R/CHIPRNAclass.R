@@ -2,10 +2,10 @@
 #' @import ModClusterR
 #' @import RColorBrewer
 #' @import ggplot2
-#' @import dplyr
 #' @import methods
 #' @import multiplot
 #' @import RNA
+#' @import dplyr
 #' @importFrom data.table fread rbindlist setnames melt data.table .I .N .SD
 #' @importFrom rlang .data
 #' @importFrom grDevices dev.off pdf
@@ -17,7 +17,6 @@
 #' @importFrom utils read.table write.table setTxtProgressBar
 #' @importFrom tibble as_tibble
 #' @importFrom readr read_tsv write_tsv
-#' @importFrom plyr mapvalues
 
 #' @title A ChIP-seq bed file of 4 columns of chr, start, end and clus
 #' @name chip
@@ -82,12 +81,13 @@ gene2peak <- setClass(
 #' @aliases tpm4plot-class
 #' @rdname tpm4plot-class
 #' @description Store TPM and related information for plotting
-#' @slot tpm.value A code{tbl} object, representing raw TPM values of either individual or grouped samples'
+#' @slot tpm.val A code{tbl} object, representing raw TPM values of either individual or grouped samples'
 #' @slot tpm.ascale A code{tbl} object, representing TPM values standardized of all samples
 #' @slot tpm.rscale A code{tbl} object, representing TPM values standardized across rows of all samples, zero variance rows were filtered according to var.idx
+#' @slot info A code{tbl} object, representing 'chr', 'start', 'end' and 'clus' of peaks genes are closest to.
 #' @slot grp.before A character vector the same data value as the 4th column of the \code{bed} slot of the \code{chip} object. The length of \code{grp.before} is identical to the row numbers of \code{tpm.value} and \code{tpm.ascale}
 #' @slot grp.after A character vector of \code{grp.before} filtered by \code{var.idx}.
-#' @slot vari.idx A logical vector of the same length as \code{grp.before} or the same row numbers as either \code{tpm.val} or \code{tpm.ascale}.
+#' @slot var.idx A logical vector of the same length as \code{grp.before} or the same row numbers as either \code{tpm.val} or \code{tpm.ascale}.
 #' @exportClass tpm4plot
 tpm4plot <- setClass(
   Class = "tpm4plot",

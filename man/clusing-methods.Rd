@@ -10,17 +10,14 @@ clusing(dat, pdffout)
 
 \S4method{clusing}{data.frame,character}(dat, pdffout)
 }
+\arguments{
+\item{dat}{A \code{data.frame} object}
+
+\item{pdffout}{A pdf file output file.}
+}
 \value{
 pr_mb predicted cluster membership in integers
 }
 \description{
 clustering of genes that are closest to peaks of interest
 }
-\section{Slots}{
-
-\describe{
-\item{\code{dat}}{A \code{data.frame} object}
-
-\item{\code{pdffout}}{A pdf file output file.}
-}}
-

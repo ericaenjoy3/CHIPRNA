@@ -53,7 +53,7 @@ setGeneric(name = "updateG2P",
 #' @return An \code{gene2peak} object
 #' @export closeGene2Peak
 setGeneric(name="closeGene2Peak",
-  def=function(obj, genef="~/athena/Gencode/mm10/annotation/transcript_tss.bed", genomef="~/athena/Gencode/mm10/sequence/chrNameLength.genome"){
+  def=function(obj, genef = "~/athena/Gencode/mm10/annotation/transcript_tss.bed", genomef = "~/athena/Gencode/mm10/sequence/chrNameLength.genome"){
     standardGeneric("closeGene2Peak")
   }
 )
@@ -76,8 +76,8 @@ setGeneric(name="deDupGene",
 #' @name clusing
 #' @rdname clusing-methods
 #' @description clustering of genes that are closest to peaks of interest
-#' @slot dat A \code{data.frame} object
-#' @slot pdffout A pdf file output file.
+#' @param dat A \code{data.frame} object
+#' @param pdffout A pdf file output file.
 #' @return pr_mb predicted cluster membership in integers
 #' @export clusing
 setGeneric(name="clusing",
@@ -137,6 +137,7 @@ setGeneric(name="plotLimma",
 #' @description plot boxplots of gene expressions positioned at gene expression samples separated by the identity of peak cluster membership.
 #' @param tpm.obj An \code{tpm4plot} object.
 #' @param pdffout A pdf output file.
+#' @param option A numeric value specifying the type of tpm values for plotting. 1: row scaled TPM values; 2: all scaled TPM values; 3: log2 TPM values.
 #' @return NULL
 #' @export plotBox
 setGeneric(name="plotBox",
